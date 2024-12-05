@@ -49,7 +49,22 @@ def get_cached_code(phone_number):
 
 response_2 = send_sms(api_key, phone_number, message)
 
+if response_2.get("code") == 1:
+   print(f" Message succcessfully sent to   {phone_number}  ")
+else:
+   print(f"Error sending SMS to  {phone_number}: {response_2.get('message')}")
 
+
+# گرفتن کد ورودی کاربر برای تایید
+user_code = input("Please enter the code you received: ")
+
+
+# مقایسه کد وارد شده با کد کش شده
+cached_code = get_cached_code(phone_number)
+if cached_code and cached_code.decode('utf-8') == user_code:
+   print("you have successfully logged in!")
+else:
+   print("The code entered is incorrect.Login failed!")
 
 
 
