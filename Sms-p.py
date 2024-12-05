@@ -38,10 +38,18 @@ def send_sms(api_key, phone_number, message):
               'X-API-KEY': api_key
              }
     
-    response = requests.post(url, json=message_data, headers=request_headers)
+    response_1 = requests.post(url, json=message_data, headers=request_headers)
     # print(f"Response Status Code: {response.status_code}")
     # print(f"Response Body: {response.text}")
-    return response.json()
+    return response_1.json()
+
+
+def get_cached_code(phone_number):
+    return redis_client.get(phone_number)
+
+response_2 = send_sms(api_key, phone_number, message)
+
+
 
 
 
